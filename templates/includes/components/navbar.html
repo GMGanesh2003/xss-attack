@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-info">
+    <div class="container">
+        <a class="navbar-brand fs-3" href="/">Navbar</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 {% if request.path == '/' %} active {% endif %}" aria-current="page" href="/">Home</a>
+                </li>
+                {% if session['user'] %}
+                    <li class="nav-item">
+                        <a class="nav-link fs-5 {% if request.path == '/add-comment' %} active {% endif %}" href="add-comment">Add Comment</a>
+                    </li>
+                    
+                    {% if session['user']['role'] == 'ADMIN' %}
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="all-users">All User</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        <a onclick="return confirm('Are you sure to logout?')" class="nav-link fs-5" href="logout">Logout</a>
+                    </li>
+
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link fs-5" href="login">Login</a>
+                    </li>                    
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+

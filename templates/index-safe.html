@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock title %}
+
+{% block main %}
+
+    <div class="container">
+        <h1 class="my-3">Welcome, {{ session['user']['name'] }}....!!!</h1>
+    </div>
+    <hr>
+    <div class="container">
+        <h1 class="text-center py-3">All Comments</h1>
+
+        {% include 'includes/components/alerts.html' %}
+
+        {% for comment in result %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="d-flex align-items-center ">
+                        <div class="rounded-circle bg-warning px-3 py-2">{{ comment.username[0] | upper }}</div>
+                        <span class="ps-2">{{ comment.username }}</span>
+                        <div class="ms-auto">{{ comment.created_at.strftime('%B %d, %Y %H:%M') }}</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3>{{ comment.title }}</h3>
+                    {{ comment.comment }}
+                </div>
+
+                <div class="card-footer ">
+                    <a href="#" class="float-end btn btn-danger">
+                        delete
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock main %}
+
+

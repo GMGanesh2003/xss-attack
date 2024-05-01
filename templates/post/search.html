@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% from "includes/utils/form_utils.html" import render_text_field %}
+
+{% block title %} Add Comment {% endblock title %}
+
+{% block main %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-10">
+                <input type="text" id="q" name="query" class="form-control" placeholder="Enter the key word">
+            </div>
+            <input type="input" id="btn" value="search" class="btn btn-success col-2">
+        </div>
+
+        <table class="table" id="table">
+
+        </table>
+    </div>
+{% endblock main %}
+
+{% block script %}
+<script>
+
+    let q = document.getElementById("q");
+    let btn = document.getElementById("btn");
+    let table = document.getElementById("table");
+
+    btn.onclick = function() {
+        fetchResult(q.value)
+    }
+
+    function fetchResult(query) {
+        table.innerHTML = "";
+        
+        fetch(`query?q=${query}`)
+        .then(r => r.json())
+        .then(data => {
+            console.log(data);
+            renderResult(data, table);
+        })
+        .catch(e => console.log(e))
+    }
+
+    function renderResult(users, table) {
+        for(let i = 0; i < users.length; i++) {
+            let current = users[i];
+            console.log(users[i]);
+            
+            if(i == 0) { // adding table heading
+                let tr = document.createElement("tr");
+                for(let k of Object.keys(current)) {
+                    let td = document.createElement("th");
+                    td.textContent = k;
+
+                    tr.appendChild(td)
+                }
+                table.appendChild(tr);
+            }
+
+            let tr = document.createElement("tr");
+            for(let k of Object.keys(current)) {
+                let td = document.createElement("td");
+                td.textContent = current[k];
+
+                tr.appendChild(td)
+            }
+
+            table.appendChild(tr);
+        }
+    }
+
+</script>
+{% endblock script %}
