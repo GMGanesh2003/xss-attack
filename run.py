@@ -1,3 +1,4 @@
+from flask import java
 from flask import Flask
 from app.auth import auth
 from app.main import main
